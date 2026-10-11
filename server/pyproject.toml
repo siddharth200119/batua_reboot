@@ -1,0 +1,23 @@
+[project]
+name = "server"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi>=0.143.0",
+    "logging>=0.4.9.6",
+    "psutil>=7.2.2",
+    "psycopg2-binary>=2.9.13",
+    "python-dotenv>=1.2.4",
+    "sse-starlette>=3.5.0",
+    "uvicorn[standard]>=0.54.0",
+    "yoyo-migrations>=9.0.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = [".", "src"]
+asyncio_mode = "auto"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]

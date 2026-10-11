@@ -1,0 +1,18 @@
+info:
+  name: Health WS
+  type: websocket
+  seq: 3
+
+websocket:
+  url: "{{base_ws_url}}/ws/health"
+  message:
+    - title: message 1
+      selected: false
+      message:
+        type: json
+        data: "{}"
+  auth: inherit
+
+settings:
+  timeout: 0
+  keepAliveInterval: 0

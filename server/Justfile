@@ -1,0 +1,45 @@
+set dotenv-load
+set dotenv-path := "../.env"
+
+DATABASE_URL := "${DB_DIALECT:-postgresql}://$DB_USER:$DB_PASS@$DB_HOST:$DB_PORT/$DB_NAME"
+
+# ─── Database ─────────────────────────────────────────────────────────
+
+# Create the database if it doesn't exist
+db-create:
+    bash scripts/db-init.sh
+
+# ─── Yoyo Migrations ─────────────────────────────────────────────────
+
+# Create a new migration
+migrate-new name:
+    uv run yoyo new -m "{{name}}"
+
+# Apply all pending migrations
+migrate-apply:
+    uv run yoyo apply -d "{{DATABASE_URL}}"
+
+# Apply a specific migration by ID
+migrate-apply-one id:
+    uv run yoyo apply -d "{{DATABASE_URL}}" {{id}}
+
+# Rollback last migration
+migrate-rollback:
+    uv run yoyo rollback -d "{{DATABASE_URL}}"
+
+# Rollback a specific migration by ID
+migrate-rollback-one id:
+    uv run yoyo rollback -d "{{DATABASE_URL}}" {{id}}
+
+# List migrations
+migrate-list:
+    uv run yoyo list -d "{{DATABASE_URL}}"
+
+# ─── Development ──────────────────────────────────────────────────────
+
+# Run the dev server
+dev:
+    uv run main.py
+
+test:
+    uv run pytest

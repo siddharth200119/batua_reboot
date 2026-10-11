@@ -1,0 +1,7 @@
+name: batua
+variables:
+  - name: base_http_url
+    value: http://127.0.0.1:8000
+    description: ""
+  - name: base_ws_url
+    value: ws://127.0.0.1:8000
